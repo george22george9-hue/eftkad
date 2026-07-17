@@ -39,7 +39,7 @@
             filter: blur(80px);
             z-index: -1;
             animation: float 10s infinite ease-in-out alternate;
-            pointer-events: none; /* عشان متغطيش على الكليكات في الصفحة */
+            pointer-events: none;
         }
         .shape1 {
             width: 40vw;
@@ -65,14 +65,14 @@
             animation-delay: -5s;
         }
 
-        /* القسم الأول (الهيرو) - ضفنا padding-top خفيف لتعويض مساحة الـ navbar */
+        /* القسم الأول (الهيرو) */
         .hero {
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
-            padding: 5% 10% 5%;
+            padding: 8% 10% 5%;
             min-height: 70vh;
-            gap: 2rem;
+            gap: 2.5rem;
             flex-wrap: wrap;
         }
 
@@ -265,51 +265,101 @@
             100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
         }
 
-        /* Media Queries - التجاوب مع مختلف الشاشات */
-        @media (max-width: 992px) {
+        /* ==========================================================================
+           شغل الريسبونسيف والموبايل من هنا
+           ========================================================================== */
+        
+        /* شاشات التابلت واللاب توب الصغير */
+        @media (max-width: 1024px) {
             .hero {
-                flex-direction: column;
-                text-align: center;
                 padding: 10% 5% 5%;
                 gap: 2rem;
             }
             .glass-card {
-                margin: 0 auto;
-                padding: 2.5rem 2rem;
-                width: 100%;
-                max-width: 500px;
-            }
-            .hero-image {
-                margin-top: 1rem;
-            }
-            .hero-image img {
-                transform: perspective(1000px) rotateY(0deg); 
-                box-shadow: 0 15px 30px rgba(0,0,0,0.5);
+                max-width: 400px;
+                padding: 2.5rem;
             }
         }
 
+        /* شاشات الموبايل (أقل من 768px) */
         @media (max-width: 768px) {
+            .hero {
+                flex-direction: column; /* ترتيب العناصر تحت بعض طوليًا */
+                align-items: center;
+                text-align: center;
+                padding: 15% 5% 5%;
+                gap: 1.5rem; /* مسافة مريحة بين الكروت */
+            }
+            
+            .glass-card {
+                width: 100%;
+                max-width: 90%; /* تملأ الشاشة مع ترك حواف رايقة */
+                min-width: unset;
+                padding: 2rem 1.5rem;
+                border-radius: 30px;
+                animation: fadeInUp 1s ease-out forwards; /* تأثير دخول أنعم على الموبايل */
+            }
+
+            .glass-card:nth-child(2) {
+                animation-delay: 0.1s;
+            }
+
+            .hero-image {
+                width: 100%;
+                min-width: unset;
+                margin-top: 1rem;
+            }
+
+            .hero-image img {
+                max-width: 90%;
+                /* إلغاء الـ 3D المائل على الموبايل عشان الصورة تبان واضحة */
+                transform: perspective(1000px) rotateY(0deg); 
+                box-shadow: 0 15px 30px rgba(0,0,0,0.5);
+            }
+
             .services-section {
-                padding: 5% 5% 15%;
+                padding: 10% 5% 20%;
             }
+
+            .services-section h2 {
+                margin-bottom: 2.5rem;
+            }
+
             .cards-container {
+                grid-template-columns: 1fr; /* كارت واحد في كل صف على الموبايل */
                 gap: 1.5rem;
+                padding: 0 5%;
             }
+
             .service-card {
                 padding: 2.5rem 1.5rem;
+                border-radius: 20px;
             }
+
             .whatsapp-btn {
                 width: 55px;
                 height: 55px;
-                font-size: 2rem;
+                font-size: 1.8rem;
                 bottom: 20px;
                 right: 20px;
             }
         }
 
+        /* موبايلات صغيرة جداً (أقل من 480px) */
         @media (max-width: 480px) {
+            .hero {
+                padding-top: 20%;
+            }
             .glass-card {
-                padding: 2rem 1.5rem;
+                max-width: 95%;
+                padding: 1.8rem 1.2rem;
+            }
+            .glass-card h1 {
+                font-size: 2rem;
+            }
+            .glass-card p {
+                font-size: 0.8rem;
+                letter-spacing: 2px;
             }
             .service-card i {
                 font-size: 2.5rem;
@@ -373,7 +423,7 @@
         <i class="fa-brands fa-whatsapp"></i>
     </a>
 
-    <!-- سكربت الـ 3D للكروت -->
+    <!-- سكربت الـ 3D للكروت (بيشتغل على الشاشات الكبيرة بس لضمان الأداء) -->
     <script>
         const isMobile = window.matchMedia("(max-width: 768px)").matches;
         
