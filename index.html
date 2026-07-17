@@ -208,11 +208,12 @@
             line-height: 1.4;
         }
 
-        /* زر الواتساب العائم */
+        /* زر الواتساب العائم (تم تعديله ليكون في نص الشاشة تحت بالظبط) */
         .whatsapp-btn {
             position: fixed;
             bottom: 30px;
-            right: 30px;
+            left: 50%;
+            transform: translateX(-50%); /* لضمان التوسيط الأفقي بدقة */
             background-color: #25D366;
             color: white;
             width: 65px;
@@ -230,7 +231,7 @@
         }
 
         .whatsapp-btn:hover {
-            transform: scale(1.1) rotate(10deg);
+            transform: translateX(-50%) scale(1.1) rotate(10deg); /* الحفاظ على السنترة أثناء التأثير */
             background-color: #20b858;
         }
 
@@ -341,7 +342,12 @@
                 height: 55px;
                 font-size: 1.8rem;
                 bottom: 20px;
-                right: 20px;
+                left: 50%;
+                transform: translateX(-50%); /* تظل متسنترة على الموبايل بدقة */
+            }
+            
+            .whatsapp-btn:hover {
+                transform: translateX(-50%) scale(1.1) rotate(10deg);
             }
         }
 
@@ -418,7 +424,7 @@
         </div>
     </section>
 
-    <!-- زر الواتساب -->
+    <!-- زر الواتساب (المسنتر في المنتصف بالأسفل) -->
     <a href="https://wa.me/201229518750" class="whatsapp-btn" target="_blank" title="Contact Us on WhatsApp">
         <i class="fa-brands fa-whatsapp"></i>
     </a>
