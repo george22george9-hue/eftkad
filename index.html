@@ -7,7 +7,7 @@
     <!-- استدعاء أيقونات FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- خطوط جوجل -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2=family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     
     <style>
         /* المتغيرات وإعدادات أساسية */
@@ -39,6 +39,7 @@
             filter: blur(80px);
             z-index: -1;
             animation: float 10s infinite ease-in-out alternate;
+            pointer-events: none; /* عشان متغطيش على الكليكات في الصفحة */
         }
         .shape1 {
             width: 40vw;
@@ -78,11 +79,10 @@
 
         .brand-logo {
             width: 100%;
-            max-width: 250px; /* حجم اللوجو على اللابتوب */
+            max-width: 250px;
             height: auto;
-            /* هذه الخدعة تحول اللوجو الأسود بخلفية بيضاء إلى أبيض بخلفية شفافة ليتناسب مع الموقع */
             filter: invert(1) brightness(2) contrast(1.2); 
-            transition: transform 0.3s ease;
+            transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
         
         .brand-logo:hover {
@@ -102,7 +102,7 @@
 
         /* تأثير الزجاج */
         .glass-card {
-            background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.01));
+            background: linear-gradient(135deg, rgba(255,255,255,0.07), rgba(255,255,255,0.01));
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             border: 1px solid var(--glass-border);
@@ -112,19 +112,22 @@
             min-width: 300px;
             max-width: 500px;
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
-            animation: slideInLeft 1s ease-out forwards;
+            animation: slideInLeft 1s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
             opacity: 0;
         }
 
         .glass-card h1 {
-            font-size: clamp(2.5rem, 5vw, 4rem); /* حجم خط متجاوب */
-            font-weight: 600;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
             margin-bottom: 0.5rem;
             letter-spacing: 1px;
+            background: linear-gradient(to right, #ffffff, #a5d1ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .glass-card p {
-            font-size: clamp(1rem, 2vw, 1.2rem);
+            font-size: clamp(0.9rem, 1.8vw, 1.1rem);
             font-weight: 300;
             letter-spacing: 3px;
             text-transform: uppercase;
@@ -135,7 +138,7 @@
         .hero-image {
             flex: 1;
             min-width: 300px;
-            animation: slideInRight 1.2s ease-out forwards;
+            animation: slideInRight 1.2s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
             opacity: 0;
             position: relative;
             display: flex;
@@ -147,10 +150,11 @@
             border-radius: 20px;
             transform: perspective(1000px) rotateY(-15deg);
             box-shadow: -20px 20px 40px rgba(0,0,0,0.7);
-            transition: transform 0.5s ease;
+            transition: transform 0.5s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.5s ease;
         }
         .hero-image img:hover {
-            transform: perspective(1000px) rotateY(0deg) scale(1.05);
+            transform: perspective(1000px) rotateY(0deg) scale(1.03);
+            box-shadow: 0 20px 40px rgba(42, 105, 255, 0.3);
         }
 
         /* قسم الخدمات */
@@ -168,7 +172,7 @@
 
         .cards-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 2rem;
             width: 100%;
         }
@@ -176,29 +180,23 @@
         .service-card {
             background: var(--blue-gradient);
             border-radius: 25px;
-            padding: 3rem 1.5rem;
+            padding: 3.5rem 2rem;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             gap: 1.5rem;
-            box-shadow: 0 10px 30px rgba(0, 150, 255, 0.2);
-            transition: all 0.4s ease;
+            box-shadow: 0 10px 30px rgba(0, 150, 255, 0.15);
+            transition: transform 0.1s ease, box-shadow 0.3s ease; /* سرعة الترانزليشن هنا مهمة عشان الـ Tilt يبقا ناعم وسريع مع حركة الماوس */
             position: relative;
             overflow: hidden;
             opacity: 0;
             transform: translateY(50px);
         }
 
-        .service-card:nth-child(1) { animation: fadeUpCard 0.8s ease-out 0.3s forwards; }
-        .service-card:nth-child(2) { animation: fadeUpCard 0.8s ease-out 0.5s forwards; }
-        .service-card:nth-child(3) { animation: fadeUpCard 0.8s ease-out 0.7s forwards; }
-
-        .service-card:hover {
-            transform: translateY(-15px) scale(1.03);
-            box-shadow: 0 20px 40px rgba(42, 105, 255, 0.5);
-            z-index: 2;
-        }
+        .service-card:nth-child(1) { animation: fadeUpCard 0.8s cubic-bezier(0.25, 0.8, 0.25, 1) 0.3s forwards; }
+        .service-card:nth-child(2) { animation: fadeUpCard 0.8s cubic-bezier(0.25, 0.8, 0.25, 1) 0.5s forwards; }
+        .service-card:nth-child(3) { animation: fadeUpCard 0.8s cubic-bezier(0.25, 0.8, 0.25, 1) 0.7s forwards; }
 
         .service-card::before {
             content: '';
@@ -207,7 +205,7 @@
             left: -100%;
             width: 50%;
             height: 100%;
-            background: linear-gradient(to right, transparent, rgba(255,255,255,0.3), transparent);
+            background: linear-gradient(to right, transparent, rgba(255,255,255,0.25), transparent);
             transform: skewX(-25deg);
             transition: 0.7s;
         }
@@ -216,14 +214,14 @@
         }
 
         .service-card i {
-            font-size: clamp(3rem, 5vw, 4rem);
+            font-size: clamp(3rem, 5vw, 3.8rem);
             color: #fff;
-            filter: drop-shadow(0 5px 15px rgba(0,0,0,0.3));
+            filter: drop-shadow(0 5px 15px rgba(0,0,0,0.2));
         }
 
         .service-card h3 {
-            font-size: clamp(1rem, 2vw, 1.2rem);
-            font-weight: 700;
+            font-size: clamp(1.1rem, 2vw, 1.3rem);
+            font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 1px;
             line-height: 1.4;
@@ -244,7 +242,7 @@
             justify-content: center;
             font-size: 2.2rem;
             text-decoration: none;
-            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.5);
+            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4);
             z-index: 1000;
             animation: pulse-whatsapp 2s infinite;
             transition: all 0.3s ease;
@@ -292,8 +290,6 @@
         }
 
         /* Media Queries - التجاوب مع مختلف الشاشات */
-        
-        /* التابلت والشاشات المتوسطة */
         @media (max-width: 992px) {
             .hero {
                 flex-direction: column;
@@ -308,17 +304,17 @@
                 margin-top: 2rem;
             }
             .hero-image img {
-                transform: perspective(1000px) rotateY(0deg); /* الغاء الميلان في الشاشات الأصغر ليأخذ مساحة أفضل */
+                transform: perspective(1000px) rotateY(0deg); 
+                box-shadow: 0 15px 30px rgba(0,0,0,0.5); /* ظبطنا الظل هنا عشان ميبقاش مشطوف على الفاضي */
             }
         }
 
-        /* الموبايلات بمختلف أحجامها */
         @media (max-width: 768px) {
             .navbar {
                 padding: 1.5rem 5%;
             }
             .brand-logo {
-                max-width: 180px; /* تصغير اللوجو للموبايل */
+                max-width: 180px;
             }
             .services-section {
                 padding: 5% 5% 15%;
@@ -338,7 +334,6 @@
             }
         }
 
-        /* الموبايلات الصغيرة جداً */
         @media (max-width: 480px) {
             .glass-card {
                 padding: 2rem 1.5rem;
@@ -358,9 +353,8 @@
     <div class="bg-shape shape1"></div>
     <div class="bg-shape shape2"></div>
 
-    <!-- شريط اللوجو (الجديد) -->
+    <!-- شريط اللوجو -->
     <nav class="navbar">
-        <!-- تأكد من حفظ صورة اللوجو باسم logo.png في نفس الفولدر -->
         <img src="logo.png" alt="SAN3A Logo" class="brand-logo">
     </nav>
 
@@ -368,10 +362,9 @@
     <header class="hero">
         <div class="glass-card">
             <h1>SAN3A</h1>
-            <p>Creative Studio</p> <!-- يمكنك تغيير الجملة كما تشاء -->
+            <p>Creative Studio</p>
         </div>
         <div class="hero-image">
-            <!-- صورة توضيحية افتراضية -->
             <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Portfolio Preview">
         </div>
     </header>
@@ -408,7 +401,6 @@
 
     <!-- سكربت الـ 3D للكروت -->
     <script>
-        // إيقاف تأثير الـ Tilt على الموبايل لأنه يعتمد على الماوس
         const isMobile = window.matchMedia("(max-width: 768px)").matches;
         
         if(!isMobile) {
@@ -423,17 +415,18 @@
                     const centerX = rect.width / 2;
                     const centerY = rect.height / 2;
                     
-                    const rotateX = ((y - centerY) / centerY) * -10;
-                    const rotateY = ((x - centerX) / centerX) * 10;
+                    const rotateX = ((y - centerY) / centerY) * -12; // زودت الحساسية سنة تدي تأثير أحسن
+                    const rotateY = ((x - centerX) / centerX) * 12;
                     
                     card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.05, 1.05, 1.05)`;
                 });
                 
+                card.style.transition = 'transform 0.1s ease'; // ترانزيشن سريع وحريري مع حركة الماوس
+
                 card.addEventListener('mouseleave', () => {
-                    card.style.transform = 'translateY(-15px) scale(1.03)';
-                    setTimeout(() => {
-                        card.style.transform = '';
-                    }, 100);
+                    // هنا بنرجع الكارت لحالته الطبيعية بنعومة من غير setTimeout بيعمل نتشة
+                    card.style.transition = 'transform 0.5s ease';
+                    card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
                 });
             });
         }
