@@ -7,7 +7,7 @@
     <!-- استدعاء أيقونات FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- خطوط جوجل -->
-    <link href="https://fonts.googleapis.com/css2=family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght=300;400;600;700&display=swap" rel="stylesheet">
     
     <style>
         /* المتغيرات وإعدادات أساسية */
@@ -65,59 +65,40 @@
             animation-delay: -5s;
         }
 
-        /* شريط التنقل (اللوجو) */
-        .navbar {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 2rem 5%;
-            width: 100%;
-            position: relative;
-            z-index: 10;
-            animation: fadeInDown 1s ease-out forwards;
-        }
-
-        .brand-logo {
-            width: 100%;
-            max-width: 250px;
-            height: auto;
-            filter: invert(1) brightness(2) contrast(1.2); 
-            transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-        }
-        
-        .brand-logo:hover {
-            transform: scale(1.05);
-        }
-
-        /* القسم الأول (الهيرو) */
+        /* القسم الأول (الهيرو) - ضفنا padding-top خفيف لتعويض مساحة الـ navbar */
         .hero {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 2% 10% 5%;
-            min-height: 60vh;
-            gap: 3rem;
+            padding: 5% 10% 5%;
+            min-height: 70vh;
+            gap: 2rem;
             flex-wrap: wrap;
         }
 
-        /* تأثير الزجاج */
+        /* تأثير الزجاج للكروت */
         .glass-card {
             background: linear-gradient(135deg, rgba(255,255,255,0.07), rgba(255,255,255,0.01));
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             border: 1px solid var(--glass-border);
             border-radius: 40px;
-            padding: 4rem;
+            padding: 3rem;
             flex: 1;
-            min-width: 300px;
-            max-width: 500px;
+            min-width: 280px;
+            max-width: 450px;
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
             animation: slideInLeft 1s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
             opacity: 0;
         }
 
+        /* أنيميشن تأخير خفيف للكارت الثاني */
+        .glass-card:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
         .glass-card h1 {
-            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-size: clamp(2.2rem, 4.5vw, 3.5rem);
             font-weight: 700;
             margin-bottom: 0.5rem;
             letter-spacing: 1px;
@@ -127,7 +108,7 @@
         }
 
         .glass-card p {
-            font-size: clamp(0.9rem, 1.8vw, 1.1rem);
+            font-size: clamp(0.85rem, 1.5vw, 1rem);
             font-weight: 300;
             letter-spacing: 3px;
             text-transform: uppercase;
@@ -136,7 +117,7 @@
 
         /* صورة اللابتوب/التابلت */
         .hero-image {
-            flex: 1;
+            flex: 1.2;
             min-width: 300px;
             animation: slideInRight 1.2s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
             opacity: 0;
@@ -146,7 +127,7 @@
         }
         .hero-image img {
             width: 100%;
-            max-width: 600px;
+            max-width: 550px;
             border-radius: 20px;
             transform: perspective(1000px) rotateY(-15deg);
             box-shadow: -20px 20px 40px rgba(0,0,0,0.7);
@@ -187,7 +168,7 @@
             justify-content: center;
             gap: 1.5rem;
             box-shadow: 0 10px 30px rgba(0, 150, 255, 0.15);
-            transition: transform 0.1s ease, box-shadow 0.3s ease; /* سرعة الترانزليشن هنا مهمة عشان الـ Tilt يبقا ناعم وسريع مع حركة الماوس */
+            transition: transform 0.1s ease, box-shadow 0.3s ease;
             position: relative;
             overflow: hidden;
             opacity: 0;
@@ -259,11 +240,6 @@
             100% { transform: translate(30px, 50px) scale(1.1); }
         }
 
-        @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
         @keyframes slideInLeft {
             from { opacity: 0; transform: translateX(-50px); }
             to { opacity: 1; transform: translateX(0); }
@@ -294,28 +270,25 @@
             .hero {
                 flex-direction: column;
                 text-align: center;
-                padding: 5% 5%;
+                padding: 10% 5% 5%;
+                gap: 2rem;
             }
             .glass-card {
                 margin: 0 auto;
-                padding: 3rem 2rem;
+                padding: 2.5rem 2rem;
+                width: 100%;
+                max-width: 500px;
             }
             .hero-image {
-                margin-top: 2rem;
+                margin-top: 1rem;
             }
             .hero-image img {
                 transform: perspective(1000px) rotateY(0deg); 
-                box-shadow: 0 15px 30px rgba(0,0,0,0.5); /* ظبطنا الظل هنا عشان ميبقاش مشطوف على الفاضي */
+                box-shadow: 0 15px 30px rgba(0,0,0,0.5);
             }
         }
 
         @media (max-width: 768px) {
-            .navbar {
-                padding: 1.5rem 5%;
-            }
-            .brand-logo {
-                max-width: 180px;
-            }
             .services-section {
                 padding: 5% 5% 15%;
             }
@@ -338,9 +311,6 @@
             .glass-card {
                 padding: 2rem 1.5rem;
             }
-            .brand-logo {
-                max-width: 150px;
-            }
             .service-card i {
                 font-size: 2.5rem;
             }
@@ -353,17 +323,21 @@
     <div class="bg-shape shape1"></div>
     <div class="bg-shape shape2"></div>
 
-    <!-- شريط اللوجو -->
-    <nav class="navbar">
-        <img src="logo.png" alt="SAN3A Logo" class="brand-logo">
-    </nav>
-
-    <!-- القسم الأول -->
+    <!-- القسم الأول (الهيرو) -->
     <header class="hero">
+        <!-- كارت SAN3A -->
         <div class="glass-card">
             <h1>SAN3A</h1>
             <p>Creative Studio</p>
         </div>
+
+        <!-- كارت George -->
+        <div class="glass-card">
+            <h1>George</h1>
+            <p>Graphic Design</p>
+        </div>
+
+        <!-- صورة المعرض -->
         <div class="hero-image">
             <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Portfolio Preview">
         </div>
@@ -415,16 +389,15 @@
                     const centerX = rect.width / 2;
                     const centerY = rect.height / 2;
                     
-                    const rotateX = ((y - centerY) / centerY) * -12; // زودت الحساسية سنة تدي تأثير أحسن
+                    const rotateX = ((y - centerY) / centerY) * -12;
                     const rotateY = ((x - centerX) / centerX) * 12;
                     
                     card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.05, 1.05, 1.05)`;
                 });
                 
-                card.style.transition = 'transform 0.1s ease'; // ترانزيشن سريع وحريري مع حركة الماوس
+                card.style.transition = 'transform 0.1s ease';
 
                 card.addEventListener('mouseleave', () => {
-                    // هنا بنرجع الكارت لحالته الطبيعية بنعومة من غير setTimeout بيعمل نتشة
                     card.style.transition = 'transform 0.5s ease';
                     card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
                 });
